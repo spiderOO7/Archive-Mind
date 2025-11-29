@@ -1,0 +1,55 @@
+@keyframes fadein {
+    from {
+        margin-top: 5%;
+        opacity:1;
+        height:30%;
+    }
+    to {
+        margin-top: 0%;
+        opacity:1;
+        height:0%;
+    }
+  }
+@keyframes slideUp {
+    0% {
+        height:70%;
+    }
+
+    100% {
+        height:100%
+    }
+}
+@keyframes slidedown{
+    0%{
+      height:30%;
+    }
+    100%{
+      height:30%;
+    }
+}
+
+@keyframes buttonfadein {
+    from {
+        height:55%;
+    }
+    to {
+        height:70%;
+    }
+}
+  
+.animate-button{
+    animation:buttonfadein 2s ease-in-out forwards;
+}
+
+.animate-slidedown{
+    animation: slidedown 2s ease-in-out forwards;
+}
+
+.animate-slideup {
+    animation: slideUp 2s ease-in-out forwards;
+  
+}
+    .animate-fadein {
+        animation: fadein 2s ease-in-out forwards;
+    }
+  

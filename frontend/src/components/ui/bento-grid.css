@@ -1,0 +1,11 @@
+@keyframes Rainbow{
+    0%{
+        background: black
+        }
+}
+
+
+
+.animate-rainbow {
+    animation: Rainbow 6s ease-in-out infinite;
+}

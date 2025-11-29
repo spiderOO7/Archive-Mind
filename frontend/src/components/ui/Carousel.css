@@ -1,0 +1,19 @@
+.perspective {
+    perspective: 1000px;
+  }
+  
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+  
+  .group-hover\:transform-rotate-y-180:hover .transform-style-3d {
+    transform: rotateY(180deg);
+  }
+  
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  
+  .transition-transform {
+    transition: transform 0.5s;
+  }

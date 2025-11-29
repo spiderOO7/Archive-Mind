@@ -1,0 +1,31 @@
+# General
+.DS_Store
+.vscode/
+.idea/
+*.log
+
+# Python / Backend
+backend/__pycache__/
+backend/*.py[cod]
+backend/venv/
+backend/.venv/
+backend/env/
+backend/.env
+*.pyc
+
+# Node / Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+
+# Large model files (optional, uncomment if you want to exclude them)
+# *.h5
+# *.pt
+# *.onnx
