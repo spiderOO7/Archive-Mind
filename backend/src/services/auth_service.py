@@ -6,9 +6,9 @@ import os
 
 load_dotenv(override=True)
 
-# Configuration for JWT
-JWT_SECRET = os.getenv("JWT_SECRET")
-JWT_ALGORITHM = os.getenv("JWT_ALGORITHM")
+# Configuration for JWT (defaults provided for demo fallback)
+JWT_SECRET = os.getenv("JWT_SECRET", "demo-secret")
+JWT_ALGORITHM = os.getenv("JWT_ALGORITHM", "HS256")
 JWT_EXPIRATION_MINUTES = 120
 # Password context for hashing
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")

@@ -37,6 +37,13 @@ export function SidebarDemo() {
       ),
     },
     {
+      label: "Ranking",
+      href: "/ranking",
+      icon: (
+        <IconUserBolt  className="text-neutral-200 h-5 w-5 flex-shrink-0" />
+      ),
+    },
+    {
       label: "AboutUs",
       href: "/settings",
       icon: (

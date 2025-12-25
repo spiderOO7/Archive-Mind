@@ -10,6 +10,8 @@ import {
   IconBrandTabler,
   IconSettings,
   IconUserBolt,
+  IconTrophy,
+  IconUpload,
 } from "@tabler/icons-react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -25,6 +27,20 @@ export function Layout() {
       href: "/homepage",
       icon: (
         <IconBrandTabler color="white" className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+      ),
+    },
+    {
+      label: "Ranking",
+      href: "/ranking",
+      icon: (
+        <IconTrophy color="white" className="text-amber-400 h-5 w-5 flex-shrink-0" />
+      ),
+    },
+    {
+      label: "Upload",
+      href: "/upload",
+      icon: (
+        <IconUpload color="white" className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
     },
     {
@@ -109,14 +125,10 @@ export const LogoIcon = () => {
 
 const Dashboard = ({
   currentPath,
-  children,
-  open,
-  setOpen
+  children
 }: {
   currentPath: string;
   children: React.ReactNode;
-  open: boolean;
-  setOpen: (open: boolean) => void;
 }) => {
   console.log(currentPath);
   return (

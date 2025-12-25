@@ -8,7 +8,8 @@ from ..controllers.project_controller import (
     fetch_all_projects,
     search_projects_by_description,
 )
-from ..services.project_service import rank_projects_with_bert, fetch_all_projects_in_db
+from ..services.project_service import rank_projects_with_bert
+from ..services.database_service import fetch_all_projects_in_db
 
 router = APIRouter()
 

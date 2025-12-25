@@ -82,7 +82,7 @@ export function LoginPage() {
               <Label htmlFor="email">Email Address</Label>
               <Input
                 id="email"
-                placeholder="projectmayhem@iiitl.ac.in"
+                placeholder="demo@demo.com"
                 type="email"
                 onChange={(e) => {
                   setEmail(e.target.value);
@@ -93,7 +93,7 @@ export function LoginPage() {
               <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
-                placeholder="••••••••"
+                placeholder="demo123"
                 type="password"
                 onChange={(e) => {
                   setPassword(e.target.value);

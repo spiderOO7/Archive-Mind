@@ -1,39 +1,28 @@
+import os
+
 import faiss
 import numpy as np
-from sentence_transformers import SentenceTransformer
-from ..services.database_service import project_collection
-import os
 import tensorflow as tf
+from sentence_transformers import SentenceTransformer
 from transformers import BertTokenizer, TFBertForSequenceClassification
+
+from ..services.database_service import USE_FAKE_DB, fetch_all_projects_in_db as fetch_all_projects_from_db
 
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
-# Load BERT tokenizer and model once (adjust path as needed)
+# Load BERT tokenizer and model once (only when not in fake/demo mode to avoid heavy downloads).
 BEST_RANKING_TF_DIR = os.path.join(os.path.dirname(__file__), '../../best_ranking_tf')
-tokenizer = BertTokenizer.from_pretrained(BEST_RANKING_TF_DIR)
-bert_rank_model = TFBertForSequenceClassification.from_pretrained(BEST_RANKING_TF_DIR)
-
-
-async def fetch_all_projects_in_db() -> list:
-    try:
-        projects_cursor = project_collection.find({})
-        projects = await projects_cursor.to_list(length=None)
-        return [
-            {
-                **project,
-                "id": str(project["_id"]),
-                "_id": str(project["_id"]),
-            }
-            for project in projects
-        ]
-    except Exception as e:
-        raise Exception(f"Error while fetching all projects: {e}")
+tokenizer = None
+bert_rank_model = None
+if not USE_FAKE_DB:
+    tokenizer = BertTokenizer.from_pretrained(BEST_RANKING_TF_DIR)
+    bert_rank_model = TFBertForSequenceClassification.from_pretrained(BEST_RANKING_TF_DIR)
 
 
 async def search_projects_by_description(description: str, top_k: int = 5) -> list:
     try:
         # Fetch all projects
-        projects = await fetch_all_projects_in_db()
+        projects = await fetch_all_projects_from_db()
 
         # Extract embeddings and project IDs
         embeddings = []
@@ -92,6 +81,16 @@ def rank_projects_with_bert(projects: list) -> list:
     if not projects:
         return []
     texts = [get_project_text_for_ranking(proj) for proj in projects]
+
+    # If the model directory is missing in demo mode, fall back to simple ordering.
+    if USE_FAKE_DB:
+        result = []
+        for idx, proj in enumerate(projects):
+            proj_copy = {k: v for k, v in proj.items() if k not in ["project_description_embedding", "project_pdf_description"]}
+            proj_copy["integer_rank"] = idx + 1
+            result.append(proj_copy)
+        return result
+
     encodings = tokenizer(
         texts,
         padding=True,
